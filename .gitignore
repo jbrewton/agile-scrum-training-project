@@ -27,8 +27,6 @@ db/*.sqlite3
 *.sassc
 .redcar/
 .sass-cache
-/config/config.yml
-/config/database.yml
 /coverage.data
 /coverage/
 /db/*.javadb/
@@ -79,4 +77,4 @@ pickle-email-*.html
 .powenv
 
 # Ignore application configuration
-/config/application.yml
+
