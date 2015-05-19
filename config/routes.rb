@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :tasks
-  root to: 'visitors#index'
+  root to: 'tasks#index'
   devise_for :users
   resources :users
   get '/users/auth/:provider/callback' => 'sessions#create'
