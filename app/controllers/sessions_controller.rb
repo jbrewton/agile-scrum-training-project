@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
-    redirect_to '/auth/bitbucket'
+    redirect_to '/users/auth/bitbucket'
   end
 
   def create
