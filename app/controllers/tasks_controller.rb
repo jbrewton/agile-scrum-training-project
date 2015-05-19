@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  include BitbucketHelper
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
