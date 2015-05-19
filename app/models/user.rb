@@ -13,10 +13,14 @@ class User < ActiveRecord::Base
 
   def self.create_with_omniauth(auth)
     create! do |user|
+      user.password = Devise.friendly_token[0,20]
       user.provider = auth['provider']
       user.uid = auth['uid']
       if auth['info']
          user.name = auth['info']['name'] || ""
+         user.email = auth['info']['email'] 
+      else
+        user.email = auth['uid']
       end
     end
   end
