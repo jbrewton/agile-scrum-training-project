@@ -6,6 +6,7 @@
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Thingdoer'}"}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js'
     = csrf_meta_tags
   %body
     %header
