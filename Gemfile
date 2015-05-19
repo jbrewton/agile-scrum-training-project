@@ -21,6 +21,7 @@ gem 'pundit'
 gem 'simple_form'
 gem 'thin'
 gem 'therubyracer', platforms: :ruby
+gem 'aws-sdk-rails', '~> 1.0'
 
 group :development do
   gem 'better_errors'
