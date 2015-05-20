@@ -1,15 +1,64 @@
 module BitbucketHelper
-  #def initialize
-=begin
-    GET /api/2.0/repositories/vetrik77/test HTTP/1.1
-    Authorization:
-    OAuth oauth_consumer_key="fw8upQUNejLamagXaC",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1432064353",oauth_nonce="-16971269",oauth_version="1.0",oauth_signature="Lu9%2Bbq0H9LmSLrF%2BGXUlJm60kkc%3D"
-    Host:
-    bitbucket.org
-    X-Target-URI:
-    https://bitbucket.org
-    Connection:
-    Keep-Alive
-=end
-  #end
+  def access_token
+    session[:access_token]
+  end
+  
+  def base_uri_v1
+    "https://bitbucket.org/api/1.0/repositories/" 
+  end
+
+  def base_uri_v2
+    "https://bitbucket.org/api/2.0/repositories/"
+  end
+
+  def repo_exists
+    if current_user
+      url = base_uri_v1 + current_user.uid + '/tasklistapp'
+      json_response = access_token.get(url)
+    end
+    if json_response.code != "200"
+      return false
+    end
+    return true
+  end
+
+  def create_repo
+    if current_user
+      url = base_uri_v2 + current_user.uid + '/tasklistapp'
+      response = access_token.post(url)
+    end
+  end
+
+  def file_exists
+    if current_user
+      url = base_uri_v1 + current_user.uid + '/tasklistapp/raw/master/tasklist.txt'
+      response = access_token.get(url)
+    end
+    if response.code != "200"
+      return false
+    end
+    return true
+  end
+
+  def pull_file
+    if current_user
+      url = base_uri_v1 + current_user.uid + '/tasklistapp/raw/master/tasklist.txt'
+      response = access_token.get(url) 
+    end
+  end
+
+  def save_file
+    if current_user
+      url = base_uri_v1 + current_user.uid + '/tasklistapp/raw/master/tasklist.txt'
+      response = access_token.post(url)
+    end
+  end
+
+  def get_ssh_key
+    if current_user
+      url = base_uri_v1 + current_user.uid + '/ssh-keys/'
+      response = access_token.get(url)
+      response.body
+    end
+  end
 end

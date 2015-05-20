@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150519194557) do
+ActiveRecord::Schema.define(version: 20150519213103) do
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", limit: 255,   null: false
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 20150519194557) do
     t.integer  "role",                   limit: 4
     t.string   "provider",               limit: 255
     t.string   "uid",                    limit: 255
+    t.string   "oauth_token",            limit: 255
+    t.string   "oauth_secret",           limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

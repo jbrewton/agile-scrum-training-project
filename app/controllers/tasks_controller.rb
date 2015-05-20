@@ -1,10 +1,19 @@
 class TasksController < ApplicationController
+  include BitbucketHelper
+  before_action :authenticate_user!
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
   def index
     @tasks = Task.all
+    if !repo_exists
+      create_repo
+    end
+
+    if file_exists
+      file = pull_file
+    end
   end
 
   # GET /tasks/1
