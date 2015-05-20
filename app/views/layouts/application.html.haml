@@ -5,9 +5,10 @@
     %title= content_for?(:title) ? yield(:title) : 'Thingdoer'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Thingdoer'}"}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    = stylesheet_link_tag 'application', "https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css"
+    = stylesheet_link_tag 'application', "//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css"
+    = stylesheet_link_tag 'application', "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = javascript_include_tag 'https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js'
+    = javascript_include_tag '//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js'
     = javascript_include_tag "//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"
     = csrf_meta_tags
   %body
