@@ -7,7 +7,13 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @tasks = Task.all
-    #bucket = BitbucketHelper.request
+    if !repo_exists
+      create_repo
+    end
+
+    if file_exists
+      file = pull_file
+    end
   end
 
   # GET /tasks/1
