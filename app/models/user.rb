@@ -26,4 +26,8 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  def hello_world
+    "Hello World"
+  end
 end

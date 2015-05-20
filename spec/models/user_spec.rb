@@ -10,4 +10,12 @@ describe User do
     expect(@user.email).to match 'user@example.com'
   end
 
+  it "should return hello world" do
+    subject.hello_world.should == "Hello World"
+  end
+
+  it "should return hello world" do
+    subject.hello_world.should == "Hello World"
+  end
+
 end
