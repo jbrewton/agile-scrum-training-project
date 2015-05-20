@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.turbolinks
+//= require jquery.readyselector
 //= require bootstrap-sprockets
 //= require data_tables
 //= require_tree .

@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
       user.password = Devise.friendly_token[0,20]
       user.provider = auth['provider']
       user.uid = auth['uid']
+      user.oauth_token = auth['credentials']['token']
+      user.oauth_secret = auth['credentials']['secret']
       if auth['info']
         user.name = auth['info']['name'] || ""
       end
@@ -25,5 +27,9 @@ class User < ActiveRecord::Base
         user.email = auth['uid']
       end
     end
+  end
+
+  def hello_world
+    "Hello World"
   end
 end
