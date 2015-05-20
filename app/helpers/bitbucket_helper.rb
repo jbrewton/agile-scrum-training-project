@@ -53,4 +53,12 @@ module BitbucketHelper
       response = access_token.post(url)
     end
   end
+
+  def get_ssh_key
+    if current_user
+      url = base_uri_v1 + current_user.uid + '/ssh-keys/'
+      response = access_token.get(url)
+      response.body
+    end
+  end
 end
