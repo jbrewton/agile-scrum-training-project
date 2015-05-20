@@ -11,6 +11,8 @@ class TasksController < ApplicationController
       create_repo
     end
 
+    save_file
+
     if file_exists
       file = pull_file
     end

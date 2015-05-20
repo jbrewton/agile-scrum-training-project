@@ -118,6 +118,7 @@ GEM
     figaro (1.1.1)
       thor (~> 0.14)
     formatador (0.2.5)
+    git (1.2.9.1)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     guard (2.12.5)
@@ -357,6 +358,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   figaro (>= 1.0.0.rc1)
+  git
   guard-bundler
   guard-rails
   guard-rspec
