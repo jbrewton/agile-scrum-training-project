@@ -24,6 +24,9 @@ gem 'omniauth'
 gem 'omniauth-bitbucket'
 gem 'httparty'
 gem 'activerecord-session_store'
+gem 'faraday'
+gem 'faraday_middleware'
+gem 'oauth2'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
