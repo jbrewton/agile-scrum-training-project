@@ -301,6 +301,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    selenium-client (1.2.18)
     selenium-webdriver (2.45.0)
       childprocess (~> 0.5)
       multi_json (~> 1.0)
@@ -401,6 +402,7 @@ DEPENDENCIES
   rb-inotify
   rspec-rails
   sass-rails (~> 5.0)
+  selenium-client
   selenium-webdriver
   simple_form
   spring

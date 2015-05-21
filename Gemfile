@@ -26,6 +26,8 @@ gem 'aws-sdk-rails', '~> 1.0'
 gem 'omniauth'
 gem 'omniauth-bitbucket'
 gem 'activerecord-session_store'
+gem 'selenium-client'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
