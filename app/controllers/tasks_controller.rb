@@ -15,7 +15,6 @@ class TasksController < ApplicationController
 
     if file_exists
       file = pull_file
-      file = file.body
       file.gsub!(/\r\n?/, "\n")
       file.each_line do |line|
         File.open('/tmp/tasklistapp/TaskListApp/tasklist.txt', 'a') { |file| file.write(line)}
@@ -25,6 +24,7 @@ class TasksController < ApplicationController
           new_task.save!
         end
       end
+      save_file
     end
   end
 
@@ -47,6 +47,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     File.open('/tmp/tasklistapp/TaskListApp/tasklist.txt', 'a') { |file| file.write(task_params["action_item"] + '\n')}
+    save_file
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: 'Task was successfully created.' }

@@ -43,18 +43,23 @@ module BitbucketHelper
 
   def pull_file
     if current_user
-      url = base_uri_v1 + current_user.uid + '/tasklistapp/raw/master/tasklist.txt'
-      response = access_token.get(url) 
+      if !Dir['/tmp/tasklistapp/TaskListApp/tasklist.txt']
+        FileUtils.rm('/tmp/tasklistapp/TaskListApp/tasklist.txt')
+      end
+      g = Git.open('/tmp/tasklistapp/TaskListApp', :log => Logger.new(STDOUT))
+      g.pull
+      response = File.read('/tmp/tasklistapp/TaskListApp/tasklist.txt')
+      #url = base_uri_v1 + current_user.uid + '/tasklistapp/raw/master/tasklist.txt'
+      #response = access_token.get(url)
     end
   end
 
   def save_file
     g = Git.open('/tmp/tasklistapp/TaskListApp', :log => Logger.new(STDOUT))
-    #g.add_remote('TaskListApp', 'https://bitbucket.org/vetrik77/tasklistapp')
-    g.add(:all=>true) 
+    g.add(:all=>true)
     g.commit_all('Auto commit')
     #g.push
-    g.push(g.remote('tasklistapp'))
+    g.push(g.remote('TaskListApp'))
   end
 
   def get_ssh_key
