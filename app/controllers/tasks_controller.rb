@@ -13,6 +13,15 @@ class TasksController < ApplicationController
 
     if file_exists
       file = pull_file
+      file = file.body
+      file.gsub!(/\r\n?/, "\n")
+      file.each_line do |line|
+        task_exists = Task.where(:action_item => line)
+        if task_exists.empty?
+          new_task = Task.new(:action_item => line)
+          new_task.save!
+        end
+      end
     end
   end
 
