@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
 
   def destroy
     reset_session
+    Task.destroy_all
     sign_out
     redirect_to root_url, :notice => 'Signed out!'
   end
