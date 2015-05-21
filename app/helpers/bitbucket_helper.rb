@@ -42,24 +42,33 @@ module BitbucketHelper
   end
 
   def pull_file
+    response = nil
     if current_user
       if !Dir['/tmp/tasklistapp/TaskListApp/tasklist.txt']
         FileUtils.rm('/tmp/tasklistapp/TaskListApp/tasklist.txt')
       end
       g = Git.open('/tmp/tasklistapp/TaskListApp', :log => Logger.new(STDOUT))
       g.pull
-      response = File.read('/tmp/tasklistapp/TaskListApp/tasklist.txt')
+      if !Dir['/tmp/tasklistapp/TaskListApp/tasklist.txt'].empty?
+        response = File.read('/tmp/tasklistapp/TaskListApp/tasklist.txt')
+      else
+        response = File.open('/tmp/tasklistapp/TaskListApp/tasklist.txt', 'w') { |file| file.write(" ")}
+      end
+
+      response
       #url = base_uri_v1 + current_user.uid + '/tasklistapp/raw/master/tasklist.txt'
       #response = access_token.get(url)
     end
   end
 
   def save_file
-    g = Git.open('/tmp/tasklistapp/TaskListApp', :log => Logger.new(STDOUT))
-    g.add(:all=>true)
-    g.commit_all('Auto commit')
-    #g.push
-    g.push(g.remote('TaskListApp'))
+    if !Dir['/tmp/tasklistapp/TaskListApp'].empty?
+      g = Git.open('/tmp/tasklistapp/TaskListApp', :log => Logger.new(STDOUT))
+      g.add(:all=>true)
+      g.commit_all('Auto commit')
+      #g.push
+      g.push(g.remote('TaskListApp'))
+    end
   end
 
   def get_ssh_key
@@ -76,7 +85,7 @@ module BitbucketHelper
     else
       g = Dir.entries('/tmp/tasklistapp/TaskListApp')
     end
-    if !Dir['/tmp/tasklistapp/TaskListApp/tasklist.txt']
+    if !Dir['/tmp/tasklistapp/TaskListApp/tasklist.txt'].empty?
       tasks = Task.all
       tasks.each do |t|
         File.open('/tmp/tasklistapp/TaskListApp/tasklist.txt', 'w') { |file| file.write(t)}

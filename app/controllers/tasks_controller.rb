@@ -14,10 +14,10 @@ class TasksController < ApplicationController
     #save_file
 
     if file_exists
+      create_file
       file = pull_file
       file.gsub!(/\r\n?/, "\n")
       file.each_line do |line|
-        File.open('/tmp/tasklistapp/TaskListApp/tasklist.txt', 'a') { |file| file.write(line)}
         task_exists = Task.where(:action_item => line)
         if task_exists.empty?
           new_task = Task.new(:action_item => line)
