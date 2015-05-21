@@ -17,6 +17,9 @@ class SessionsController < ApplicationController
   def destroy
     reset_session
     Task.destroy_all
+    if Dir['/tmp/tasklistapp/TaskListApp/tasklist.txt']
+      FileUtils.rm('/tmp/tasklistapp/TaskListApp/tasklist.txt')
+    end
     sign_out
     redirect_to root_url, :notice => 'Signed out!'
   end

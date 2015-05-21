@@ -11,11 +11,14 @@ class TasksController < ApplicationController
       create_repo
     end
 
+    #save_file
+
     if file_exists
       file = pull_file
       file = file.body
       file.gsub!(/\r\n?/, "\n")
       file.each_line do |line|
+        File.open('/tmp/tasklistapp/TaskListApp/tasklist.txt', 'a') { |file| file.write(line)}
         task_exists = Task.where(:action_item => line)
         if task_exists.empty?
           new_task = Task.new(:action_item => line)
@@ -43,7 +46,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
-
+    File.open('/tmp/tasklistapp/TaskListApp/tasklist.txt', 'a') { |file| file.write(task_params["action_item"] + '\n')}
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: 'Task was successfully created.' }

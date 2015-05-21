@@ -1,3 +1,4 @@
+require 'fileutils'
 module BitbucketHelper
   def access_token
     session[:access_token]
@@ -48,10 +49,12 @@ module BitbucketHelper
   end
 
   def save_file
-    if current_user
-      url = base_uri_v1 + current_user.uid + '/tasklistapp/raw/master/tasklist.txt'
-      response = access_token.post(url)
-    end
+    g = Git.open('/tmp/tasklistapp/TaskListApp', :log => Logger.new(STDOUT))
+    #g.add_remote('TaskListApp', 'https://bitbucket.org/vetrik77/tasklistapp')
+    g.add(:all=>true) 
+    g.commit_all('Auto commit')
+    #g.push
+    g.push(g.remote('tasklistapp'))
   end
 
   def get_ssh_key
@@ -59,6 +62,20 @@ module BitbucketHelper
       url = base_uri_v1 + current_user.uid + '/ssh-keys/'
       response = access_token.get(url)
       response.body
+    end
+  end
+
+  def create_file
+    if !Dir['/tmp/tasklistapp']
+      g = Git.clone('https://bitbucket.org/vetrik77/tasklistapp', 'TaskListApp', :path => '/tmp/tasklistapp')
+    else
+      g = Dir.entries('/tmp/tasklistapp/TaskListApp')
+    end
+    if !Dir['/tmp/tasklistapp/TaskListApp/tasklist.txt']
+      tasks = Task.all
+      tasks.each do |t|
+        File.open('/tmp/tasklistapp/TaskListApp/tasklist.txt', 'w') { |file| file.write(t)}
+      end
     end
   end
 end
