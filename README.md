@@ -1,5 +1,8 @@
-Thingdoer
+Agile Scrub Training Project (aka: Thingdoer)
 ================
+
+Integrates with bitbucket and displays tasks backed by a text file stored in bitbucket.
+
 
 This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
 provided by the [RailsApps Project](http://railsapps.github.io/).
